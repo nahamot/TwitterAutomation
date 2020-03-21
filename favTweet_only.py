@@ -14,7 +14,7 @@ auth.set_access_token(AT, ATS)
 api = tweepy.API(auth)
 
 set_count = 100
-word = "新人Vtuber"
+word = "ここに検索するワードを書くよ"
 results = api.search(q=word, count=set_count)
 
 for result in results:
