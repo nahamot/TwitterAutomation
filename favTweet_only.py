@@ -1,6 +1,7 @@
 #coding:utf-8
-import json, config
+import config
 import tweepy
+import time
 # Accesss Token Secert
 
 CK = config.CONSUMER_KEY
@@ -12,21 +13,29 @@ auth = tweepy.OAuthHandler(CK, CS)
 auth.set_access_token(AT, ATS)
 api = tweepy.API(auth)
 
-word = "Amazonアフィリエイト"
 set_count = 100
+word = "新人Vtuber"
 results = api.search(q=word, count=set_count)
 
 for result in results:
-    username = result.user._json['screen_name']
-    user_id = result.id
-    print("ユーザーID："+str(user_id))
-    user = result.user.name
-    print("ユーザー名："+user)
+    username = result.user.name
+    user_id = result.user.id
     tweet = result.text
-    print("ユーザーのコメント："+tweet)
+    tweet_id = result.id
+    print("ユーザー名："+username)
+    print("ユーザーID："+str(user_id))
+    print("-----------------------------")
 
     try:
-        api.create_favorite(user_id)
-        print(user+"に「いいね」をしました\n\n")
+        api.create_favorite(user_id) #ふぁぼする
+        print(tweet)
+        print("-----------------------------")
+        print("をふぁぼしました(*‘ω‘ *)\n\n")
+        print("-----------------------------")
+        time.sleep(2)
     except:
-        print(tweet+"はもういいねしてます\n\n")
+        print(tweet)
+        print("-----------------------------")
+        print("はもうふぁぼしてます( ﾟДﾟ)\n\n")
+        print("-----------------------------")
+        time.sleep(2)
