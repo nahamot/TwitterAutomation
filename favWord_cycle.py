@@ -12,7 +12,6 @@ auth = tweepy.OAuthHandler(CK, CS)
 auth.set_access_token(AT, ATS)
 api = tweepy.API(auth)
 
-# 特定の単語でつぶやいているユーザーを5人検索して、フォローされておらず、フォロワーが200人以上いればフォロー。
 fav_count = 0
 loop_out = False
 for loop_count in range(7):
@@ -35,7 +34,7 @@ for loop_count in range(7):
         query = "ロドス"
     elif loop_count == 7:
         query = "アークナイツ"
-    # Max100人までしか検索できないぽい。また、単語検索結果で検索結果出てきたアカウント数が上限となる。
+    # Max100人までしか検索できない。単語検索結果で出てきたアカウント数が上限となる。
     search_count = 70
     results = api.search(q=query, count=search_count)
     for result in results:
@@ -72,6 +71,6 @@ for loop_count in range(7):
     # ファボ上限になったらループ抜ける
     if loop_out:
         break
-    # アクセス連続しすぎるとやばいかもだから5分待つ（5分待つことで、153APIアクセス/5分 = 459APIアクセス/15分でAPIアクセス上限に引っかからないはず。）
+    # アクセス連続しすぎるとやばいかもだから5分待つ（5分待つことで、153APIアクセス/5分 = 459APIアクセス/15分でAPIアクセス上限）
     print("5分待ちます")
     time.sleep(300)
